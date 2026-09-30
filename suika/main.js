@@ -22,6 +22,45 @@ const render = Render.create({
     },
 });
 
+//벽 배치를 위한 world 선언
+const world = engine.world;
+
+
+const leftwall = Bodies.rectangle(15,395,30,790,{
+                            // x중심점,y중심점,x길이,y길이
+    isStatic:true, //고정해주는 기능
+    render: {fillStyle:'#E6B143'}
+
+})
+
+const rightwall = Bodies.rectangle(605,395,30,790,{
+    // x중심점,y중심점,x길이,y길이
+isStatic:true, //고정해주는 기능
+render: {fillStyle:'#E6B143'}
+
+
+})
+
+
+const ground = Bodies.rectangle(320,820,620,60,{
+    // x중심점,y중심점,x길이,y길이
+isStatic:true, //고정해주는 기능
+render: {fillStyle:'#E6B143'}
+
+})
+
+const topLine = Bodies.rectangle(310,150,620,2,{
+    // x중심점,y중심점,x길이,y길이
+isStatic:true, //고정해주는 기능
+render: {fillStyle:'#E6B143'}
+
+})
+
+//벽배치
+world.add(world,[leftwall,rightwall,ground,topLine]);
+
+
+
 //테스트 실행
 Render.run(render);
 Runner.run(engine);
