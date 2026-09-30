@@ -57,7 +57,7 @@ render: {fillStyle:'#E6B143'}
 })
 
 //벽배치
-world.add(world,[leftwall,rightwall,ground,topLine]);
+World.add(world,[leftwall,rightwall,ground,topLine]);
 
 
 
