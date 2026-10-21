@@ -55,7 +55,7 @@ render: {fillStyle:'#E6B143'}
 const topLine = Bodies.rectangle(310,150,620,2,{
     // x중심점,y중심점,x길이,y길이
 isStatic:true, //고정해주는 기능
-isSensor:ture,
+isSensor:true,
 render: {fillStyle:'#E6B143'}
 
 })
@@ -70,17 +70,26 @@ Render.run(render);
 Runner.run(engine);
 
 
+let currentBody = null;
+let currentFruit = null;
+
+
 //과일 떨어지는 함수
 function addFruit() {
-    const index = 1;
+    const index = Math.floor(Math.random() * 5);
     const fruit = FRUITS[index];
 
     const body = Bodies.circle(300,50,fruit.radius,{
         index: index,
+        isSleeping:true,
         render: {
             sprite:{texture:`${fruit.name}.png`},
-        }
+        },
+        restitution:0.2,
     })
+
+    currentBody = body
+    currentFruit= fruit
 
     World.add(world,body)
 }
