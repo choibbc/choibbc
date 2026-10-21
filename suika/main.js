@@ -1,3 +1,6 @@
+import { FRUITS } from "/suika/fruits.js"
+
+
 // 모듈 불러오기
 var Engine = Matter.Engine,
     Render = Matter.Render,
@@ -52,6 +55,7 @@ render: {fillStyle:'#E6B143'}
 const topLine = Bodies.rectangle(310,150,620,2,{
     // x중심점,y중심점,x길이,y길이
 isStatic:true, //고정해주는 기능
+isSensor:ture,
 render: {fillStyle:'#E6B143'}
 
 })
@@ -64,3 +68,20 @@ World.add(world,[leftwall,rightwall,ground,topLine]);
 //테스트 실행
 Render.run(render);
 Runner.run(engine);
+
+
+//과일 떨어지는 함수
+function addFruit() {
+    const index = 1;
+    const fruit = FRUITS[index];
+
+    const body = Bodies.circle(300,50,fruit.radius,{
+        index: index,
+        render: {
+            sprite:{texture:`${fruit.name}.png`},
+        }
+    })
+
+    World.add(world,body)
+}
+addFruit();
