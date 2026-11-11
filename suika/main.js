@@ -6,8 +6,8 @@ var Engine = Matter.Engine,
     Render = Matter.Render,
     Runner = Matter.Runner,
     Bodies = Matter.Bodies,
-    World  = Matter.World;
-
+    World  = Matter.World,
+    Body = Matter.Body;
 
 //엔진 선언
 const engine = Engine.create();
@@ -72,6 +72,7 @@ Runner.run(engine);
 
 let currentBody = null;
 let currentFruit = null;
+let disableAction = false;
 
 
 //과일 떨어지는 함수
@@ -93,4 +94,39 @@ function addFruit() {
 
     World.add(world,body)
 }
+
+window.onkeydown = ( event ) => {
+    if (disableAction)
+    return;
+
+
+    switch(event.code) {
+        case "KeyA":
+            Body.setPosition(currentBody,{
+                x:currentBody.position.x - 10,
+                y:currentBody.position.y
+            });
+            break;
+            case "KeyD":
+            Body.setPosition(currentBody,{
+                x:currentBody.position.x + 10,
+                y:currentBody.position.y
+            });
+            break;
+        case "KeyS":
+            currentBody.isSleeping = false;
+            disableAction = true;
+
+            setTimeout(() => {
+                addFruit();
+                disableAction = false;
+            }, 1000);
+            break;
+    }
+}
+
+
+
+
+
 addFruit();
