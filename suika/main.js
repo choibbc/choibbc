@@ -8,6 +8,7 @@ var Engine = Matter.Engine,
     Bodies = Matter.Bodies,
     World  = Matter.World,
     Body = Matter.Body;
+    Events = Matter.Events;
 
 //엔진 선언
 const engine = Engine.create();
@@ -126,7 +127,28 @@ window.onkeydown = ( event ) => {
 }
 
 
+Events.on(engine,"collisionStart", (event) => {
+    event.pairs.forEach((collision) => {
+            const index = collision.bodyA.index;
 
+        if(collision.bodyA.index == collision.bodyB.index) {
+            World.remove(world,[collision.bodyA,collision.bodyB])
+        }
+
+        const newFruit = FRUITS[index + 1];
+        const newBody = Bodies.circle(
+            collision.collision.supports[0].x,
+            collision.collision.supports[0].y,
+            newFruit.radius,
+            {
+                index : index + 1,
+                render : { sprite: {texture:`${fruit.name}.png`}}
+
+
+            }
+        )
+    })
+});
 
 
 addFruit();
